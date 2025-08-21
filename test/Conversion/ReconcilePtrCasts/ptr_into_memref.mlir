@@ -2,7 +2,7 @@
 
 module {
   func.func @bitcast_ptr_as_src(%arg0: memref<*xi32>, %arg1: memref<*xi32>, %arg2: i32, %arg3: i32, %arg4: i32, %arg5: i32, %arg6: i32, %arg7: i32) {
-    %0 = tptr.type_offset i32  : i32
+    %0 = ptr.type_offset i32  : i32
     %c1_i32 = arith.constant 1 : i32
     %c2 = arith.constant 2 : index
     %1 = builtin.unrealized_conversion_cast %arg1 : memref<*xi32> to !tt.ptr<i32>

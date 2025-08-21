@@ -25,6 +25,7 @@
 #include "mlir/Dialect/MemRef/IR/MemRef.h"
 #include "mlir/Dialect/Ptr/IR/PtrAttrs.h"
 #include "mlir/Dialect/Ptr/IR/PtrDialect.h"
+#include "mlir/Dialect/Ptr/IR/PtrOps.h"
 #include "mlir/Dialect/Ptr/IR/PtrTypes.h"
 #include "mlir/Dialect/SCF/IR/SCF.h"
 #include "mlir/Dialect/SCF/Transforms/Patterns.h"
@@ -182,7 +183,7 @@ struct AddPtrConverter : public OpConversionPattern<triton::AddPtrOp> {
     auto pointeeType = cast<triton::PointerType>(op.getType()).getPointeeType();
     auto offsetType = op.getOffset().getType();
     auto pointeeSizeInBytes =
-        rewriter.create<tptr::TypeOffsetOp>(loc, offsetType, pointeeType);
+        rewriter.create<ptr::TypeOffsetOp>(loc, offsetType, pointeeType);
     auto scaledOffset =
         rewriter.create<arith::MulIOp>(loc, op.getOffset(), pointeeSizeInBytes);
     rewriter.replaceOpWithNewOp<tptr::PtrAddOp>(
@@ -475,7 +476,8 @@ public:
 
     target.addLegalDialect<arith::ArithDialect, linalg::LinalgDialect,
                            tensor::TensorDialect, affine::AffineDialect,
-                           tptr::TPtrDialect, memref::MemRefDialect>();
+                           tptr::TPtrDialect, memref::MemRefDialect,
+                           ptr::PtrDialect>();
 
     patterns
         .add<AddPtrConverter, BitCastConverter, StoreConverter, LoadConverter,

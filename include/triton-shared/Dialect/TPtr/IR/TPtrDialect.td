@@ -66,31 +66,6 @@ def TPTR_PtrToIntOp : TPTR_Op<"ptrtoint", [
   let assemblyFormat = "$arg attr-dict `:` type($arg) `to` type($res)";
 }
 
-def TPTR_TypeOffsetOp : TPTR_Op<"type_offset", [ConstantLike, Pure]> {
-  let summary = "Creates a type offset constant.";
-  let description = [{
-    The `addr.type_offset` operation produces an int or index-typed SSA value
-    equal to a target-specific constant representing the offset of a single
-    element of the given type. The default return type is `index`.
-    Example:
-
-    ```mlir
-    %0 = addr.type_offset f32
-    %1 = addr.type_offset memref<12 x f64> : i32
-    ```
-  }];
-
-  let arguments = (ins TypeAttr:$baseType);
-  let results = (outs AnySignlessIntegerOrIndex:$result);
-  let builders = [
-    OpBuilder<(ins "TypeAttr":$baseType, CArg<"Type", "nullptr">:$resultTy)>
-  ];
-  let assemblyFormat = [{
-     attr-dict $baseType custom<IntType>(type($result))
-  }];
-  let hasFolder = 1;
-}
-
 def TPTR_FromMemrefOp : TPTR_Op<"from_memref", [Pure]> {
   let arguments = (ins AnyMemRef:$input);
   let results = (outs Ptr_PtrType:$result);

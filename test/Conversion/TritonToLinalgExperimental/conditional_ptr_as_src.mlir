@@ -28,7 +28,6 @@ module {
 
 // CHECK-LABEL:  func.func @simple_cf_into_structured_load
 // CHECK-SAME:   ([[PARAM_0_:%.+]]: memref<*xf32>, [[PARAM_1_:%.+]]: memref<*xf32>, [[PARAM_2_:%.+]]: i32, [[PARAM_3_:%.+]]: i32, [[PARAM_4_:%.+]]: i32, [[PARAM_5_:%.+]]: i32, [[PARAM_6_:%.+]]: i32, [[PARAM_7_:%.+]]: i32, [[PARAM_8_:%.+]]: i32) {
-// CHECK-DAG:       [[VAR_0_:%.+]] = tptr.type_offset f32  : i32
 // CHECK-DAG:       [[CST_6_:%.+]] = arith.constant 6 : index
 // CHECK-DAG:       [[CST_2_:%.+]] = arith.constant 2 : i32
 // CHECK-DAG:       [[CST_1_:%.+]] = arith.constant 1 : i32
@@ -38,11 +37,13 @@ module {
 // CHECK-DAG:       [[VAR_2_:%.+]] = arith.cmpi eq, [[PARAM_2_]], [[CST_1_]] : i32
 // CHECK-NOT: separator of consecutive DAGs
 // CHECK-DAG:       [[VAR_3_:%.+]] = scf.if [[VAR_2_]] -> (!ptr.ptr<#ptr.generic_space>) {
+// CHECK-DAG:         [[VAR_0_:%.+]] = ptr.type_offset f32 : i32
 // CHECK-DAG:         [[VAR_6_:%.+]] = arith.muli [[PARAM_2_]], [[CST_2_]] : i32
 // CHECK:             [[VAR_7_:%.+]] = arith.muli [[VAR_6_]], [[VAR_0_]] : i32
 // CHECK:             [[VAR_8_:%.+]] = tptr.ptradd [[VAR_1_]] [[VAR_7_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
 // CHECK:             scf.yield [[VAR_8_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } else {
+// CHECK-DAG:         [[VAR_0_:%.+]] = ptr.type_offset f32 : i32
 // CHECK:             [[VAR_6_1_:%.+]] = arith.muli [[PARAM_2_]], [[VAR_0_]] : i32
 // CHECK:             [[VAR_7_1_:%.+]] = tptr.ptradd [[VAR_1_]] [[VAR_6_1_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
 // CHECK:             scf.yield [[VAR_7_1_]] : !ptr.ptr<#ptr.generic_space>
