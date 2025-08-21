@@ -186,7 +186,7 @@ struct AddPtrConverter : public OpConversionPattern<triton::AddPtrOp> {
         rewriter.create<ptr::TypeOffsetOp>(loc, offsetType, pointeeType);
     auto scaledOffset =
         rewriter.create<arith::MulIOp>(loc, op.getOffset(), pointeeSizeInBytes);
-    rewriter.replaceOpWithNewOp<tptr::PtrAddOp>(
+    rewriter.replaceOpWithNewOp<ptr::PtrAddOp>(
         op,
         ptr::PtrType::get(rewriter.getContext(),
                           ptr::GenericSpaceAttr::get(rewriter.getContext())),

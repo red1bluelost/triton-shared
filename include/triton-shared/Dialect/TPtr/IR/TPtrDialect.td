@@ -79,21 +79,4 @@ def TPTR_ToMemrefOp : TPTR_Op<"to_memref", [
   let assemblyFormat = "$arg attr-dict `:` type($arg) `to` type($res)";
 }
 
-def TPTR_PtrAddOp : TPTR_Op<"ptradd", [Pure, AllTypesMatch<["base", "result"]>]> {
-  let summary = "Pointer-index add operation";
-  let description = [{
-    The `ptradd` operation adds an `address` and an integer or index to
-    produce a new address.
-
-    Example:
-    ```mlir
-    %addr = ptr.ptradd %addr : !ptr.ptr<3 : i32>, %c10 : i32
-    ```
-  }];
-
-  let arguments = (ins Ptr_PtrType:$base, AnySignlessIntegerOrIndex:$offset);
-  let results = (outs Ptr_PtrType:$result);
-  let assemblyFormat = "$base $offset attr-dict `:` type($base) `,` type($offset) `to` type($result)";
-}
-
 #endif // TPTR_DIALECT

@@ -40,12 +40,12 @@ module {
 // CHECK-DAG:         [[VAR_0_:%.+]] = ptr.type_offset f32 : i32
 // CHECK-DAG:         [[VAR_6_:%.+]] = arith.muli [[PARAM_2_]], [[CST_2_]] : i32
 // CHECK:             [[VAR_7_:%.+]] = arith.muli [[VAR_6_]], [[VAR_0_]] : i32
-// CHECK:             [[VAR_8_:%.+]] = tptr.ptradd [[VAR_1_]] [[VAR_7_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_8_:%.+]] = ptr.ptr_add [[VAR_1_]], [[VAR_7_]] : <#ptr.generic_space>, i32
 // CHECK:             scf.yield [[VAR_8_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } else {
 // CHECK-DAG:         [[VAR_0_:%.+]] = ptr.type_offset f32 : i32
 // CHECK:             [[VAR_6_1_:%.+]] = arith.muli [[PARAM_2_]], [[VAR_0_]] : i32
-// CHECK:             [[VAR_7_1_:%.+]] = tptr.ptradd [[VAR_1_]] [[VAR_6_1_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_7_1_:%.+]] = ptr.ptr_add [[VAR_1_]], [[VAR_6_1_]] : <#ptr.generic_space>, i32
 // CHECK:             scf.yield [[VAR_7_1_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           }
 // CHECK:           [[VAR_4_:%.+]] = tptr.to_memref [[VAR_3_]] : <#ptr.generic_space> to memref<1xf32>

@@ -83,7 +83,7 @@ module {
 // CHECK:           ^bb0([[IN_2_:%.+]]: !ptr.ptr<#ptr.generic_space>, [[IN_3_:%.+]]: i32, [[IN_4_:%.+]]: !ptr.ptr<#ptr.generic_space>):
 // CHECK-DAG:         [[VAR_1_:%.+]] = ptr.type_offset i32 : i32
 // CHECK:             [[VAR_35_2_:%.+]] = arith.muli [[IN_3_]], [[VAR_1_]] : i32
-// CHECK:             [[VAR_36_2_:%.+]] = tptr.ptradd [[IN_2_]] [[VAR_35_2_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_36_2_:%.+]] = ptr.ptr_add [[IN_2_]], [[VAR_35_2_]] : <#ptr.generic_space>, i32
 // CHECK:             linalg.yield [[VAR_36_2_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } -> tensor<8x!ptr.ptr<#ptr.generic_space>>
 // CHECK:           [[VAR_16_:%.+]] = linalg.fill ins([[VAR_3_]] : !ptr.ptr<#ptr.generic_space>) outs([[VAR_13_]] : tensor<8x!ptr.ptr<#ptr.generic_space>>) -> tensor<8x!ptr.ptr<#ptr.generic_space>>
@@ -91,7 +91,7 @@ module {
 // CHECK:           ^bb0([[IN_5_:%.+]]: !ptr.ptr<#ptr.generic_space>, [[IN_6_:%.+]]: i32, [[IN_7_:%.+]]: !ptr.ptr<#ptr.generic_space>):
 // CHECK-DAG:         [[VAR_1_:%.+]] = ptr.type_offset i32 : i32
 // CHECK:             [[VAR_35_3_:%.+]] = arith.muli [[IN_6_]], [[VAR_1_]] : i32
-// CHECK:             [[VAR_36_3_:%.+]] = tptr.ptradd [[IN_5_]] [[VAR_35_3_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_36_3_:%.+]] = ptr.ptr_add [[IN_5_]], [[VAR_35_3_]] : <#ptr.generic_space>, i32
 // CHECK:             linalg.yield [[VAR_36_3_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } -> tensor<8x!ptr.ptr<#ptr.generic_space>>
 // CHECK:           [[VAR_18_:%.+]] = tensor.empty() : tensor<16x!ptr.ptr<#ptr.generic_space>>
@@ -101,7 +101,7 @@ module {
 // CHECK:           ^bb0([[IN_8_:%.+]]: !ptr.ptr<#ptr.generic_space>, [[IN_9_:%.+]]: i32, [[IN_10_:%.+]]: !ptr.ptr<#ptr.generic_space>):
 // CHECK-DAG:         [[VAR_1_:%.+]] = ptr.type_offset i32 : i32
 // CHECK:             [[VAR_35_4_:%.+]] = arith.muli [[IN_9_]], [[VAR_1_]] : i32
-// CHECK:             [[VAR_36_4_:%.+]] = tptr.ptradd [[IN_8_]] [[VAR_35_4_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_36_4_:%.+]] = ptr.ptr_add [[IN_8_]], [[VAR_35_4_]] : <#ptr.generic_space>, i32
 // CHECK:             linalg.yield [[VAR_36_4_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } -> tensor<16x!ptr.ptr<#ptr.generic_space>>
 // CHECK:           [[VAR_20_:%.+]] = linalg.generic {indexing_maps = [#map, #map], iterator_types = ["parallel"]} ins([[VAR_19_]] : tensor<16x!ptr.ptr<#ptr.generic_space>>) outs([[VAR_7_]] : tensor<16xi32>) {
@@ -119,7 +119,7 @@ module {
 // CHECK:           ^bb0([[IN_16_:%.+]]: !ptr.ptr<#ptr.generic_space>, [[IN_17_:%.+]]: i32, [[IN_18_:%.+]]: !ptr.ptr<#ptr.generic_space>):
 // CHECK-DAG:         [[VAR_1_:%.+]] = ptr.type_offset i32 : i32
 // CHECK:             [[VAR_35_7_:%.+]] = arith.muli [[IN_17_]], [[VAR_1_]] : i32
-// CHECK:             [[VAR_36_5_:%.+]] = tptr.ptradd [[IN_16_]] [[VAR_35_7_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_36_5_:%.+]] = ptr.ptr_add [[IN_16_]], [[VAR_35_7_]] : <#ptr.generic_space>, i32
 // CHECK:             linalg.yield [[VAR_36_5_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } -> tensor<16x!ptr.ptr<#ptr.generic_space>>
 // CHECK:           [[VAR_23_:%.+]] = linalg.generic {indexing_maps = [#map, #map, #map], iterator_types = ["parallel"]} ins([[VAR_20_]], [[VAR_8_]] : tensor<16xi32>, tensor<16xi32>) outs([[VAR_20_]] : tensor<16xi32>) {
@@ -131,7 +131,7 @@ module {
 // CHECK:           ^bb0([[IN_22_:%.+]]: !ptr.ptr<#ptr.generic_space>, [[IN_23_:%.+]]: i32, [[IN_24_:%.+]]: !ptr.ptr<#ptr.generic_space>):
 // CHECK-DAG:         [[VAR_1_:%.+]] = ptr.type_offset i32 : i32
 // CHECK:             [[VAR_35_9_:%.+]] = arith.muli [[IN_23_]], [[VAR_1_]] : i32
-// CHECK:             [[VAR_36_6_:%.+]] = tptr.ptradd [[IN_22_]] [[VAR_35_9_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_36_6_:%.+]] = ptr.ptr_add [[IN_22_]], [[VAR_35_9_]] : <#ptr.generic_space>, i32
 // CHECK:             linalg.yield [[VAR_36_6_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } -> tensor<16x!ptr.ptr<#ptr.generic_space>>
 // CHECK:           [[VAR_25_:%.+]] = linalg.fill ins([[VAR_2_]] : !ptr.ptr<#ptr.generic_space>) outs([[VAR_18_]] : tensor<16x!ptr.ptr<#ptr.generic_space>>) -> tensor<16x!ptr.ptr<#ptr.generic_space>>
@@ -139,7 +139,7 @@ module {
 // CHECK:           ^bb0([[IN_25_:%.+]]: !ptr.ptr<#ptr.generic_space>, [[IN_26_:%.+]]: i32, [[IN_27_:%.+]]: !ptr.ptr<#ptr.generic_space>):
 // CHECK-DAG:         [[VAR_0_:%.+]] = ptr.type_offset i1 : i32
 // CHECK:             [[VAR_35_10_:%.+]] = arith.muli [[IN_26_]], [[VAR_0_]] : i32
-// CHECK:             [[VAR_36_7_:%.+]] = tptr.ptradd [[IN_25_]] [[VAR_35_10_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_36_7_:%.+]] = ptr.ptr_add [[IN_25_]], [[VAR_35_10_]] : <#ptr.generic_space>, i32
 // CHECK:             linalg.yield [[VAR_36_7_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } -> tensor<16x!ptr.ptr<#ptr.generic_space>>
 // CHECK:           [[VAR_27_:%.+]] = linalg.generic {indexing_maps = [#map, #map], iterator_types = ["parallel"]} ins([[VAR_26_]] : tensor<16x!ptr.ptr<#ptr.generic_space>>) outs([[VAR_5_]] : tensor<16xi8>) {
@@ -163,7 +163,7 @@ module {
 // CHECK:           ^bb0([[IN_37_:%.+]]: !ptr.ptr<#ptr.generic_space>, [[IN_38_:%.+]]: i32, [[IN_39_:%.+]]: !ptr.ptr<#ptr.generic_space>):
 // CHECK-DAG:         [[VAR_1_:%.+]] = ptr.type_offset i32 : i32
 // CHECK:             [[VAR_35_14_:%.+]] = arith.muli [[IN_38_]], [[VAR_1_]] : i32
-// CHECK:             [[VAR_36_8_:%.+]] = tptr.ptradd [[IN_37_]] [[VAR_35_14_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_36_8_:%.+]] = ptr.ptr_add [[IN_37_]], [[VAR_35_14_]] : <#ptr.generic_space>, i32
 // CHECK:             linalg.yield [[VAR_36_8_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } -> tensor<16x!ptr.ptr<#ptr.generic_space>>
 // CHECK:           [[VAR_32_:%.+]] = linalg.generic {indexing_maps = [#map, #map, #map], iterator_types = ["parallel"]} ins([[VAR_31_]], [[VAR_29_]] : tensor<16x!ptr.ptr<#ptr.generic_space>>, tensor<16xi1>) outs([[VAR_7_]] : tensor<16xi32>) {
@@ -182,7 +182,7 @@ module {
 // CHECK:           ^bb0([[IN_43_:%.+]]: !ptr.ptr<#ptr.generic_space>, [[IN_44_:%.+]]: i32, [[IN_45_:%.+]]: !ptr.ptr<#ptr.generic_space>):
 // CHECK-DAG:         [[VAR_1_:%.+]] = ptr.type_offset i32 : i32
 // CHECK:             [[VAR_35_16_:%.+]] = arith.muli [[IN_44_]], [[VAR_1_]] : i32
-// CHECK:             [[VAR_36_10_:%.+]] = tptr.ptradd [[IN_43_]] [[VAR_35_16_]] : <#ptr.generic_space>, i32 to <#ptr.generic_space>
+// CHECK:             [[VAR_36_10_:%.+]] = ptr.ptr_add [[IN_43_]], [[VAR_35_16_]] : <#ptr.generic_space>, i32
 // CHECK:             linalg.yield [[VAR_36_10_]] : !ptr.ptr<#ptr.generic_space>
 // CHECK:           } -> tensor<16x!ptr.ptr<#ptr.generic_space>>
 // CHECK:           linalg.generic {indexing_maps = [#map, #map, #map], iterator_types = ["parallel"]} ins([[VAR_34_]], [[VAR_32_]], [[VAR_29_]] : tensor<16x!ptr.ptr<#ptr.generic_space>>, tensor<16xi32>, tensor<16xi1>) {
