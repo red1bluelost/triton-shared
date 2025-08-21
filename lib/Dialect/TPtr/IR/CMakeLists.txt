@@ -1,5 +1,4 @@
 add_triton_library(TPtrIR
-  TPtrOps.cpp
   TPtrDialect.cpp
 
   DEPENDS
